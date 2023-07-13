@@ -29,21 +29,64 @@ class Annonce {
         return $annonces;
     }
 
-    // Méthodes pour obtenir les attributs de l'annonce
+    // Méthodes getters et setters pour les attributs de l'annonce
     public function getTitre() {
         return $this->titre;
+    }
+
+    public function setTitre($titre) {
+        $this->titre = $titre;
     }
 
     public function getDescription() {
         return $this->description;
     }
 
+    public function setDescription($description) {
+        $this->description = $description;
+    }
+
     public function getPrix() {
         return $this->prix;
+    }
+
+    public function setPrix($prix) {
+        $this->prix = $prix;
     }
 
     public function getDatePublication() {
         return $this->datePublication;
     }
+
+    public function setDatePublication($datePublication) {
+        $this->datePublication = $datePublication;
+    }
+
+    public function getIdUtilisateur() {
+        return $this->idUtilisateur;
+    }
+
+    public function setIdUtilisateur($idUtilisateur) {
+        $this->idUtilisateur = $idUtilisateur;
+    }
+
+    // Méthode pour insérer l'annonce dans la base de données
+    public function insert() {
+        $pdo = new PDO("mysql:host=localhost:3307;dbname=lemauvaiscoin;charset=utf8", "root", "");
+
+        $query = "INSERT INTO Annonces (Titre, Description, ID_utilisateur, Categorie, Prix, Date_publication) VALUES (:titre, :description, :idUtilisateur, :categorie, :prix, :datePublication)";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':titre', $this->titre);
+        $stmt->bindParam(':description', $this->description);
+        $stmt->bindParam(':idUtilisateur', $this->idUtilisateur);
+        $stmt->bindParam(':categorie', $this->categorie);
+        $stmt->bindParam(':prix', $this->prix);
+        $stmt->bindParam(':datePublication', $this->datePublication);
+        $stmt->execute();
+
+        $this->id = $pdo->lastInsertId();
+    }
 }
+
+
 ?>

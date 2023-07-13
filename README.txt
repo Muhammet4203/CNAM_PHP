@@ -22,9 +22,16 @@ Utilisation WAMPSERVER (MariaDB -> 3307)
 > Images
 > Catégories
 
-
  - Fonctionnalités : 
+ 
+ > Création d'annonce
+ > Récupérations de toutes les annonces
+ > Inscription
+ > Connexion
+ > Déconnexion
+ > Hash MDP
+
+ - Fonctionnalités à faire si plus de temps (trop compliqué à mettre en place): 
 
 > Observer l'API Découpage Administratif - (API Geo)
-> Formulaire pour poser une annonce (Création d'annonce)
 > Insértion de fichier (Sauvegarde de ou des images sur le serveur) 

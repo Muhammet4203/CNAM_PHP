@@ -1,5 +1,9 @@
 <?php
 require_once 'config.php';
+require_once 'Annonce.php';
+require_once 'Utilisateur.php';
+
+session_start();
 
 if (!isset($_SESSION['utilisateur'])) {
     header('Location: connexion.php');
@@ -19,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $annonce->setDescription($description);
     $annonce->setPrix($prix);
     $annonce->setDatePublication(date('Y-m-d'));
+
+    // Récupérer l'ID de l'utilisateur en cours à partir de la session
+    $idUtilisateur = $_SESSION['utilisateur']->getId();
+    $annonce->setIdUtilisateur($idUtilisateur);
 
     // Insérer l'annonce dans la base de données
     $annonce->insert();

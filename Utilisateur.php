@@ -52,7 +52,7 @@ class Utilisateur {
     public static function getUtilisateurParEmail($email) {
         global $pdo;
 
-        $query = "SELECT * FROM utilisateurs WHERE Adresse_email = :email";
+        $query = "SELECT * FROM utilisateurs WHERE adresse_email = :email";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

@@ -2,6 +2,8 @@
 require_once 'config.php';
 require_once 'Utilisateur.php';
 
+session_start();
+
 if (isset($_SESSION['utilisateur'])) {
     header('Location: index.php');
     exit;
@@ -14,9 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $motDePasse = $_POST['mot_de_passe'];
 
     // Vérifier les informations de connexion
-    $pdo = new PDO("mysql:host=$host;dbname=$dbName;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $utilisateur = Utilisateur::getUtilisateurParEmail($email);
     if ($utilisateur && password_verify($motDePasse, $utilisateur->getMotDePasse())) {
         // Authentification réussie

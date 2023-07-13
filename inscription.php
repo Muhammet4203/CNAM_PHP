@@ -12,15 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
-    $email = $_POST['email'];
+    $email = $_POST['adresse_email'];
     $motDePasse = $_POST['mot_de_passe'];
+
+    // Hasher le mot de passe
+    $motDePasseHash = password_hash($motDePasse, PASSWORD_DEFAULT);
 
     // Créer un nouvel utilisateur
     $utilisateur = new Utilisateur();
     $utilisateur->setNom($nom);
     $utilisateur->setPrenom($prenom);
-    $utilisateur->setEmail($email);
-    $utilisateur->setMotDePasse($motDePasse);
+    $utilisateur->setAdresseEmail($email);
+    $utilisateur->setMotDePasse($motDePasseHash);
 
     // Insérer l'utilisateur dans la base de données
     $utilisateur->insert();
@@ -47,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="prenom">Prénom :</label>
         <input type="text" name="prenom" id="prenom" required>
 
-        <label for="email">Adresse e-mail :</label>
-        <input type="email" name="email" id="email" required>
+        <label for="adresse_email">Adresse e-mail :</label>
+        <input type="email" name="adresse_email" id="adresse_email" required>
 
         <label for="mot_de_passe">Mot de passe :</label>
         <input type="password" name="mot_de_passe" id="mot_de_passe" required>

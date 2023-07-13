@@ -2,6 +2,8 @@
 require_once 'config.php';
 require_once 'Annonce.php';
 
+session_start();
+
 $annonces = Annonce::getAllAnnonces();
 ?>
 
